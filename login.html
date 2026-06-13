@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Queens Supermarket</title>
+
+  <style>
+    body{
+      background:#f4f6f8;
+      font-family: Arial, sans-serif;
+    }
+
+    .form-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form{
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form div{
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+    }
+
+    label{
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input{
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button{
+      margin-top: 15px;
+      padding: 12px;
+      background: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover{
+      background:#15803d;
+    }
+
+    .extra{
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .extra a{
+      color:#16a34a;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+<script>
+  const form = document.querySelector('form');
+  
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Grab the email and password inputs
+    const email = document.querySelector('input[type="email"]').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    // Send login info to our local server
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        alert("Welcome back, " + data.user.name + "!");
+        window.location.href = "index.html"; // Takes them to the main page
+    } else {
+        alert("Error: " + data.error); // Displays "Wrong email or password."
+    }
+  });
+</script>
+<body>
+
+<section class="form-container">
+  <form>
+
+    <h1>Login</h1>
+
+    <div>
+      <label>Email</label>
+      <input type="email" placeholder="Enter your email" required>
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input type="password" placeholder="Enter your password" required>
+    </div>
+
+    <button type="submit">Login</button>
+
+    <div class="extra">
+      Don't have an account?
+      <a href="registration.html">Register</a>
+    </div>
+
+  </form>
+</section>
+
+</body>
+</html>

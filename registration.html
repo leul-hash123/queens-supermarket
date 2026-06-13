@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<style>
+  body{
+    background:#f4f6f8;
+    font-family: Arial, sans-serif;
+  }
+
+  .form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  form{
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+
+  h1{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  label{
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  button{
+    margin-top: 15px;
+    padding: 12px;
+    background: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background:#15803d;
+  }
+</style>
+
+  <script>
+  // 1. Find the form on our webpage
+  const form = document.querySelector('form');
+  
+  // 2. Listen for when the user clicks the "Register" button
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevents the page from reloading automatically
+
+    // 3. Grab the values the user typed into the inputs using your class names
+    const name = document.querySelector('.div1').value;
+    const email = document.querySelector('.div2').value;
+    const phone = document.querySelector('.div3').value;
+    const password = document.querySelector('.div4').value;
+    const confirmPassword = document.querySelector('.div5').value;
+
+    // 4. Simple check to ensure passwords match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    // 5. Send this data over to your live local server!
+    const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, password })
+    });
+
+    const data = await response.json();
+
+    // 6. Check if the server says everything is okay
+    if (response.ok) {
+        alert(data.message); // Displays "Account created successfully!"
+        window.location.href = "login.html"; // Takes them to the login page automatically
+    } else {
+        alert("Error: " + data.error); // Displays error if email already exists
+    }
+  });
+</script>
+<body>
+<section class="form-container">
+  <form>
+    <h1>Create Your Account</h1>
+
+    <div>
+        <label>Full Name</label>
+        <input class="div1" type="text" placeholder="Enter your name" required>
+    </div>
+    <div>
+        <label>Email</label>
+        <input class="div2" type="email" placeholder="Enter your email" required>
+    </div>
+    <div>
+        <label>Phone Number</label>
+        <input class="div3" type="tel" placeholder="Enter your phone number" required>
+    </div>
+    <div>
+        <label>Password</label>
+        <input class="div4" type="password" placeholder="Create password" required>
+    </div>
+    <div>
+        <label>Confirm Password</label>
+        <input class="div5" type="password" placeholder="Confirm password" required>
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+</section>
+</body>
+</html>

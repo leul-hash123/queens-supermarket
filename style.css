@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to left , gray,black,rgb(232, 192, 192));
+}
+.card:hover{
+    background:linear-gradient(to left , gray,rgb(153, 72, 240),white);
+ color: white;
+ scale: calc(1.055);
+}
+.navbar {
+  background: #169ca3;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: #dcfce7;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.page-title {
+  text-align: center;
+  margin-top: 30px;
+}
+.news-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  line-height: 1.7;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.news-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.news-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: #c499fc;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.page-title{
+    color:white;
+}
